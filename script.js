@@ -1,4 +1,3 @@
-jS-Challenge-1-jiyah\script.js
 
 const userName = prompt("What is your name?");
 const user = {
@@ -17,7 +16,7 @@ for (let i = 0; i < 7; i++) {
 
 const randomNumber = Math.floor(Math.random() * 7);
 
-const nameListDiv = document .getElementById("nameList");
+const nameListDiv = document .getElementById("name-list");
 names.forEach((name) => {
     const nameElement = document.createElement("p");
     nameElement.textContent = name;
@@ -25,10 +24,15 @@ names.forEach((name) => {
 });
 
 document.getElementById("submit-btn").addEventListener("click", () => {
-    const guess = parseInt(document.getElementById("guess-input").value, 10);
+    const guessInput = document.getElementById("guess-input").value;
+    const guess = parseInt(guessInput, 10);
+
+    if (isNaN(guess) || guess < 0 || guess > 6) {
+        alert("Please enter a valid number between 0 and 6.");
+        return;
+    }
      
     const storedUser = JSON.parse(localStorage.getItem('user'));
-
 
     if (guess === randomNumber) {
         alert ("What a Cawinkydicnk! You got it right!");
@@ -40,5 +44,4 @@ document.getElementById("submit-btn").addEventListener("click", () => {
         
         localStorage.setItem("user", JSON.stringify(storedUser));
 
-    }
-});
+    });
