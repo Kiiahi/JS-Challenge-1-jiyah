@@ -7,10 +7,10 @@ const user = {
     wrongs: 0, 
 };
 
-localStorage.setIten("user", JSON.stringify(user));
+localStorage.setItem("user", JSON.stringify(user));
 
 const names = [];
-for (Let i = 0; i < 7; i++) {
+for (let i = 0; i < 7; i++) {
   const name = prompt(`Enter name ${i + 1}:`);
   names.push(name);
 }
@@ -20,19 +20,25 @@ const randomNumber = Math.floor(Math.random() * 7);
 const nameListDiv = document .getElementById("nameList");
 names.forEach((name) => {
     const nameElement = document.createElement("p");
-    nameElemenr.textContent = name;
+    nameElement.textContent = name;
     nameListDiv.appendChild(nameElement);
 });
 
 document.getElementById("submit-btn").addEventListener("click", () => {
-    const guess = parseInt(document.getElementById("guess-Input").value, 10);
+    const guess = parseInt(document.getElementById("guess-input").value, 10);
+     
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+
 
     if (guess === randomNumber) {
         alert ("What a Cawinkydicnk! You got it right!");
-
-        const storedUser = JSON.parse(localStorage.getItem('user'));
+        storedUser.first += 1;
+    } else {
+        alert("LOSER! Try again!");
         storedUser.wrongs += 1;
-        lacalStorage.setItem("user", JSON.stringify(storedUser));
+    }
+        
+        localStorage.setItem("user", JSON.stringify(storedUser));
 
     }
 });
